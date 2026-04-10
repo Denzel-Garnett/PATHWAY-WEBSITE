@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IT Career Roadmap</title>
+<style>
+:root{--bg-main:#0f0f0f;--card-bg:#1e1e1e;--hover-bg:#2a2a2a;--text-primary:#efefef;--text-secondary:#aaaaaa;--yt-blue:#3ea6ff;--border:#333333}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg-main);color:var(--text-primary);line-height:1.5;min-height:100vh}
+.header{background:var(--card-bg);border-bottom:1px solid var(--border);padding:1.25rem 2rem;position:sticky;top:0;z-index:1000}
+.header h1{font-size:20px;font-weight:700;color:var(--text-primary)}
+.header p{font-size:13px;color:var(--text-secondary);margin-top:4px}
+.container{max-width:1000px;margin:0 auto;padding:1.5rem}
+.track-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:2rem}
+.track-btn{padding:1rem;border-radius:12px;border:1px solid var(--border);background:var(--card-bg);color:var(--text-primary);cursor:pointer;text-align:center;transition:all .2s}
+.track-btn:hover{border-color:#555;background:var(--hover-bg)}
+.track-btn.active{border-color:var(--yt-blue);background:rgba(62,166,255,0.1);color:var(--yt-blue)}
+.track-icon{font-size:22px;margin-bottom:6px;display:block}
+.track-name{font-size:14px;font-weight:600}
+.track-sub{font-size:11px;color:var(--text-secondary);margin-top:3px}
+.track-panel{display:none} .track-panel.active{display:block}
+.path-box{background:rgba(62,166,255,0.05);border:1px solid var(--border);border-left:4px solid var(--yt-blue);border-radius:8px;padding:1.25rem;margin-bottom:1.5rem}
+.path-box-title{font-size:13px;font-weight:700;color:var(--yt-blue);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.path-box-text{font-size:14px;color:var(--text-secondary);line-height:1.6}
+.intro-bar{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1rem}
+.intro-title{font-size:14px;font-weight:600;margin-bottom:.4rem;color:var(--text-primary)}
+.intro-desc{font-size:13px;color:var(--text-secondary);line-height:1.6}
+.skill-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.5rem}
+.stab{padding:7px 14px;border-radius:20px;border:1px solid var(--border);font-size:12px;cursor:pointer;background:var(--card-bg);color:var(--text-secondary);transition:.15s;font-weight:600;text-transform:uppercase}
+.stab:hover{border-color:var(--text-secondary);color:var(--text-primary)}
+.stab.active{background:var(--yt-blue);color:#000;border-color:var(--yt-blue)}
+.spanel{display:none} .spanel.active{display:block}
+.skill-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.75rem;margin-bottom:1rem}
+.prio{display:inline-block;font-size:10px;font-weight:800;padding:4px 10px;border-radius:4px;margin-bottom:1rem;text-transform:uppercase;letter-spacing:1px}
+.p-basic{background:#254025;color:#8fdf8f} .p-inter{background:#403010;color:#f5d6a4} .p-adv{background:#451a1a;color:#f1c4c4}
+.card-title{font-size:18px;font-weight:700;margin-bottom:.75rem;color:var(--text-primary)}
+.why-box{background:#161616;padding:1rem;border-left:3px solid var(--yt-blue);border-radius:0 6px 6px 0;font-size:13.5px;color:var(--text-secondary);margin-bottom:1.5rem;line-height:1.6}
+.card-desc{font-size:13.5px;color:var(--text-secondary);line-height:1.6;margin-bottom:1.5rem}
+.resources{display:grid;gap:8px}
+.res{background:#1a1a1a;border:1px solid var(--border);padding:12px 16px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;transition:.15s}
+.res:hover{border-color:#555;background:var(--hover-bg);transform:translateX(3px)}
+.res-meta{flex:1;min-width:0}
+.res-name{color:var(--yt-blue);text-decoration:none;font-weight:600;font-size:14px;display:block;margin-bottom:2px}
+.res-name:hover{text-decoration:underline}
+.res-detail{font-size:11.5px;color:var(--text-secondary);line-height:1.4}
+.badges{display:flex;flex-direction:column;gap:4px;flex-shrink:0;margin-left:15px}
+.badge{font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;text-align:center;text-transform:uppercase;letter-spacing:.02em}
+.b-free{background:#0d2b1a;color:#4ade80;border:1px solid #166534}
+.b-cert{background:#1e1040;color:#c084fc;border:1px solid #5b21b6}
+.b-lab{background:#061f26;color:#22d3ee;border:1px solid #0e7490}
+.b-li{background:#0c1f3a;color:#60a5fa;border:1px solid #1d4ed8}
+.cert-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
+.cert-card-header{display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:1rem;margin-bottom:1rem}
+.cert-card-name{font-size:18px;font-weight:700;color:var(--text-primary)}
+.cert-card-sub{font-size:12px;color:var(--text-secondary);margin-top:4px}
+.cert-exam-cost{font-size:16px;font-weight:700;color:var(--yt-blue);text-align:right}
+.cert-meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem}
+.cert-meta-box{background:#1a1a1a;border:1px solid var(--border);border-radius:8px;padding:.75rem}
+.cert-meta-label{font-size:10px;color:var(--text-secondary);text-transform:uppercase}
+.cert-meta-val{font-size:13px;font-weight:600;color:var(--text-primary);margin-top:2px}
+.cert-section-title{font-size:12px;font-weight:700;color:var(--yt-blue);text-transform:uppercase;margin:1rem 0 .5rem 0}
+.domain-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.domain-bar-wrap{flex:1;background:#222;height:6px;border-radius:3px;overflow:hidden}
+.domain-bar{height:100%;background:var(--yt-blue)}
+.domain-label{font-size:12px;color:var(--text-secondary);width:180px}
+.domain-pct{font-size:11px;font-weight:600;color:var(--yt-blue);width:30px;text-align:right}
+.tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.tip-box{background:#1a1a1a;border:1px solid var(--border);padding:.75rem;border-radius:8px}
+.tip-label{font-size:10px;color:var(--yt-blue);font-weight:700;text-transform:uppercase;margin-bottom:4px}
+.tip-text{font-size:12px;color:var(--text-secondary)}
+@media(max-width:768px){.track-nav{grid-template-columns:repeat(3,1fr)} .cert-meta-grid{grid-template-columns:repeat(2,1fr)} .tips-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🤖 IT Career Roadmap — Learning Guide 🤖</h1>
+  <p>Follow the tabs in sequence. Complete Step 1 before moving to Step 2.</p>
+</div>
+
+<div class="container">
+
+<div class="track-nav">
+  <div class="track-btn active" onclick="switchTrack('support')"><span class="track-icon">🖥️</span><div class="track-name">Support</div><div class="track-sub">Phase 01</div></div>
+  <div class="track-btn" onclick="switchTrack('infra')"><span class="track-icon">🏗️</span><div class="track-name">Infrastructure</div><div class="track-sub">Phase 02</div></div>
+  <div class="track-btn" onclick="switchTrack('network')"><span class="track-icon">🌐</span><div class="track-name">Networking</div><div class="track-sub">Phase 03</div></div>
+  <div class="track-btn" onclick="switchTrack('modern')"><span class="track-icon">🚀</span><div class="track-name">Modern IT</div><div class="track-sub">Phase 04</div></div>
+  <div class="track-btn" onclick="switchTrack('certs')"><span class="track-icon">🏅</span><div class="track-name">Cert Guides</div><div class="track-sub">Deep Dives</div></div>
+</div>
+
+<div id="track-support" class="track-panel active">
+  <div class="path-box">
+    <div class="path-box-title">📍 MISSION DIRECTIVE: FOUNDATIONS</div>
+    <div class="path-box-text">Follow steps 01-11 sequentially. Master Hardware (1) and Networking (2) before moving to OS environments. Finish with Identity (10) and Linux (11) to bridge into Infrastructure.</div>
+  </div>
+  <div class="skill-tabs" id="support-tabs">
+    <div class="stab active" onclick="switchSkill('support','hardware')">01. Hardware</div>
+    <div class="stab" onclick="switchSkill('support','networking')">02. NetBasics</div>
+    <div class="stab" onclick="switchSkill('support','os')">03. WinOS/PS</div>
+    <div class="stab" onclick="switchSkill('support','macos')">04. macOS</div>
+    <div class="stab" onclick="switchSkill('support','m365')">05. M365</div>
+    <div class="stab" onclick="switchSkill('support','ad')">06. ActiveDir</div>
+    <div class="stab" onclick="switchSkill('support','ticketing')">07. Ticketing</div>
+    <div class="stab" onclick="switchSkill('support','remote')">08. Remote</div>
+    <div class="stab" onclick="switchSkill('support','security')">09. Security</div>
+    <div class="stab" onclick="switchSkill('support','identity')">10. IAM/RMM</div>
+    <div class="stab" onclick="switchSkill('support','linux')">11. Linux</div>
+  </div>
+
+  <div id="support-hardware" class="spanel active">
+    <div class="skill-card">
+      <span class="prio p-basic">[LEVEL: GREENHORN]</span>
+      <div class="card-title">Hardware & CompTIA A+ Protocol</div>
+      <div class="why-box">The absolute starting line. CompTIA A+ is the most recognized entry-level cert. Every IT professional must understand the physical world before managing the virtual one.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.professormesser.com/free-a-plus-training/220-1101/220-1101-video/220-1101-training-course/" target="_blank">Professor Messer — Full A+ Core 1</a><div class="res-detail">100% free, covers every exam objective. The single best free A+ resource.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.professormesser.com/free-a-plus-training/220-1102/220-1102-video/220-1102-training-course/" target="_blank">Professor Messer — Full A+ Core 2</a><div class="res-detail">Covers OS, security, troubleshooting, and procedures.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=87t6P5ZHTP0" target="_blank">freeCodeCamp — Full CompTIA A+ Course</a><div class="res-detail">Complete beginner-to-exam-ready course on YouTube (14+ hours).</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://uniontestprep.com/comptia-a" target="_blank">Union Test Prep — A+ Practice Tests</a><div class="res-detail">Free practice questions organized by domain.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.examcompass.com/comptia/a-plus-certification/a-plus-practice-tests" target="_blank">ExamCompass — Domain Quizzes</a><div class="res-detail">Hundreds of questions for daily drilling.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://app.cybrary.it/browse/refined?q=comptia+a%2B" target="_blank">Cybrary — A+ Prep Videos (Free Tier)</a><div class="res-detail">Free A+ video content with practice quizzes.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/@LinusTechTips" target="_blank">Linus Tech Tips</a><div class="res-detail">Best free channel for understanding physical PC hardware teardowns.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.ifixit.com/Guide" target="_blank">iFixit — Repair Guides</a><div class="res-detail">Step-by-step hardware repair guides for thousands of devices.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.howtogeek.com/school/" target="_blank">How-To Geek School</a><div class="res-detail">Beginner-friendly deep dives on hardware, storage, and networking.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="support-networking" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-basic">[LEVEL: GREENHORN]</span>
+      <div class="card-title">Networking for IT Support (TCP/IP, DNS, DHCP)</div>
+      <div class="card-desc">Understand IP addressing, DNS, DHCP, and how to troubleshoot connectivity using ipconfig, ping, and tracert.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.professormesser.com/network-plus/n10-009/n10-009-video/n10-009-training-course/" target="_blank">Professor Messer — Network+ (Sections 1-3)</a><div class="res-detail">Watch the first 3 sections for support-level networking knowledge.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/@NetworkChuck" target="_blank">NetworkChuck — Networking for Beginners</a><div class="res-detail">"Free CCNA" playlist teaches subnetting, DNS, and VLANs visually.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netacad.com/courses/networking/networking-essentials" target="_blank">Cisco NetAcad — Networking Essentials</a><div class="res-detail">Free Cisco course covering IP, DNS, DHCP, wireless. Earn a Cisco badge.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="support-os" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-basic">[LEVEL: GREENHORN]</span>
+      <div class="card-title">Windows Administration & PowerShell</div>
+      <div class="why-box">95%+ of corporate environments run Windows. You need to know user management, registry, Event Viewer, and troubleshooting common failures.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.microsoft.com/en-us/training/paths/m365-getmodern/" target="_blank">Microsoft Learn — Windows 10/11 Fundamentals</a><div class="res-detail">Official free training on Windows deployment and troubleshooting.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-li">LinkedIn</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=OXv5P7GCBoo" target="_blank">freeCodeCamp — Windows 10 Admin for Beginners</a><div class="res-detail">Full course on user accounts, permissions, networking, troubleshooting.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.professormesser.com/free-a-plus-training/220-1102/220-1102-video/220-1102-training-course/" target="_blank">Professor Messer — A+ Core 2 Windows Sections</a><div class="res-detail">Covers everything a support tech needs to know about Windows OS.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022" target="_blank">Microsoft Eval Center — Windows Server Trial</a><div class="res-detail">Download Server 2022 for free (180 days) and install in VirtualBox.</div></div><div class="badges"><span class="badge b-lab">Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.microsoft.com/en-us/training/modules/introduction-to-powershell/" target="_blank">Microsoft Learn — Intro to PowerShell</a><div class="res-detail">Official beginner PowerShell course with interactive exercises.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-li">LinkedIn</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=UVUd9_k9C6A" target="_blank">freeCodeCamp — PowerShell Full Course</a><div class="res-detail">Covers variables, loops, functions, file management, and AD commands.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="support-macos" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-basic">[LEVEL: GREENHORN]</span>
+      <div class="card-title">macOS Support Basics</div>
+      <div class="card-desc">Understanding macOS fundamentals, Time Machine, Keychain, FileVault, and Apple MDM is expected in mixed corporate environments.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://support.apple.com/guide/mac-help/welcome/mac" target="_blank">Apple Support — Official macOS User Guide</a><div class="res-detail">Reference this when troubleshooting real issues.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=67keaaWOKzE" target="_blank">YouTube — macOS for IT Administrators</a><div class="res-detail">Search "macOS IT support tutorial" for admin perspectives.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://training.jamf.com/learn" target="_blank">Jamf Training — Free Jamf 100 Cert</a><div class="res-detail">Jamf is the #1 Apple device management platform. Free cert course.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Cert</span><span class="badge b-li">LinkedIn</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="support-m365" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-inter">[LEVEL: RUNNER]</span>
+      <div class="card-title">Microsoft 365 Administration</div>
+      <div class="why-box">M365 is the backbone of nearly every enterprise. You will manage user licenses, shared mailboxes, Teams channels, and OneDrive daily.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.microsoft.com/en-us/training/paths/m365-fundamentals/" target="_blank">Microsoft Learn — MS-900 Fundamentals</a><div class="res-detail">Official free learning path for M365 services. Earn a completion badge.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">MS-900</span><span class="badge b-li">LinkedIn</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.microsoft.com/en-us/training/paths/administer-m365/" target="_blank">Microsoft Learn — M365 Administrator (MS-102)</a><div class="res-detail">Advanced identity, security, compliance, and service management.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">MS-102</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/@TechWithMarcus" target="_blank">Tech With Marcus — YouTube</a><div class="res-detail">Best free channel for M365 admin tasks (Teams, Exchange).</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://developer.microsoft.com/en-us/microsoft-365/dev-program" target="_blank">M365 Developer Program — Free Tenant</a><div class="res-detail">Get a free M365 sandbox tenant with 25 user licenses for real practice.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="support-ad" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-inter">[LEVEL: RUNNER]</span>
+      <div class="card-title">Active Directory Deep Dive</div>
+      <div class="card-desc">Understand Organizational Units (OUs), Group Policy Objects (GPOs), security groups, password policies, and AD security principles.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.microsoft.com/en-us/training/paths/active-directory-domain-services/" target="_blank">Microsoft Learn — AD Domain Services</a><div class="res-detail">Complete official free AD learning path covering GPOs and replication.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-li">LinkedIn</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=85-bp7XxWDQ" target="_blank">freeCodeCamp — Active Directory Full Course</a><div class="res-detail">Full beginner-to-intermediate AD course with real-world scenarios.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022" target="_blank">MS Eval Center — Windows Server Trial</a><div class="res-detail">Set up your own AD domain controller in VirtualBox for free.</div></div><div class="badges"><span class="badge b-lab">Lab</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="support-ticketing" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-inter">[LEVEL: RUNNER]</span>
+      <div class="card-title">ITSM, Ticketing & ITIL 4</div>
+      <div class="card-desc">ITIL is the global standard for how IT manages incidents. Learn SLAs, escalation paths, and practical ticketing using ServiceNow.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.coursera.org/learn/itil-4-foundation" target="_blank">Coursera — ITIL 4 Foundation (Audit free)</a><div class="res-detail">Click "Audit" to access all video content for free. Covers exam objectives.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=FLpXBQcSmXE" target="_blank">YouTube — ITIL 4 Full Course</a><div class="res-detail">All concepts, definitions, and practice questions for ITIL.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://developer.servicenow.com/dev.do" target="_blank">ServiceNow — Free Developer Instance</a><div class="res-detail">Get a FREE fully functional instance to practice the #1 ITSM platform.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://nowlearning.servicenow.com/lxp?id=overview" target="_blank">ServiceNow Now Learning</a><div class="res-detail">Free official training with micro-certs that appear on your LinkedIn.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Cert</span><span class="badge b-li">LinkedIn</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://university.atlassian.com/student/catalog" target="_blank">Atlassian University — Jira Service Management</a><div class="res-detail">Free official training for Jira with completion badges.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="support-remote" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-inter">[LEVEL: RUNNER]</span>
+      <div class="card-title">Remote Support Tools (Intune / MDM)</div>
+      <div class="card-desc">Modern IT support is largely remote. Learn Remote Desktop, Windows Admin Center, and MDM platforms like Intune or JAMF.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.microsoft.com/en-us/training/paths/endpoint-manager-fundamentals/" target="_blank">Microsoft Learn — Intune & Endpoint Manager</a><div class="res-detail">Free official course on managing devices. Earn a LinkedIn badge.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-li">LinkedIn</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/results?search_query=Microsoft+Intune+tutorial+beginners" target="_blank">YouTube — Intune Tutorials</a><div class="res-detail">Multiple free tutorials on device enrollment, policies, and app deployment.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://training.jamf.com/learn" target="_blank">Jamf — Free Jamf 100 Cert</a><div class="res-detail">Free certification covering Apple device management. Add directly to LinkedIn.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Cert</span><span class="badge b-li">LinkedIn</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="support-security" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-inter">[LEVEL: RUNNER]</span>
+      <div class="card-title">Security Awareness & CompTIA Security+</div>
+      <div class="card-desc">Validates knowledge of threats, vulnerabilities, identity management, and risk management. Required for government and high-level IT roles.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.professormesser.com/security-plus/sy0-701/sy0-701-video/sy0-701-training-course/" target="_blank">Professor Messer — Security+ SY0-701</a><div class="res-detail">Completely free, covers every exam objective. The gold standard prep.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=9Hd8QJmZQUc" target="_blank">freeCodeCamp — Security+ Course</a><div class="res-detail">Complete exam-ready Security+ course on YouTube covering all domains.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.cybrary.it/course/comptia-security-plus" target="_blank">Cybrary — Security+ Free Tier</a><div class="res-detail">Free video content plus practice quizzes. Good supplement to Messer.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://tryhackme.com/path/outline/presecurity" target="_blank">TryHackMe — Pre-Security Path</a><div class="res-detail">Free hands-on security labs in a browser. Covers networking, Linux, and web.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-lab">Labs</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="support-identity" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Okta (IAM) & NinjaOne (RMM)</div>
+      <div class="why-box">Managing 10,000 users requires advanced platforms. Okta controls Identity (SSO/MFA), and NinjaOne pushes software updates remotely.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learning.okta.com/" target="_blank">Okta Helpdesk Onboarding</a><div class="res-detail">Official free path. Learn to create users, groups, and security policies.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://certification.okta.com/page/professional-performance-exam-study-guide" target="_blank">Okta Professional Practice Exams</a><div class="res-detail">The entire "Performance" practice environment is free.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.ninjaone.com/ninjaone-academy/" target="_blank">NinjaOne Academy</a><div class="res-detail">Complete overview of asset management, remote access, and automation.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Cert</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="support-linux" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Linux Fundamentals for IT Support</div>
+      <div class="card-desc">Knowing basic Linux commands (ls, cd, chmod, grep) puts you far ahead of peers and perfectly bridges the gap into Phase 2: Infrastructure.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://linuxjourney.com" target="_blank">Linux Journey</a><div class="res-detail">The best free interactive Linux course on the internet. Start here.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=ROjZy1WbCIA" target="_blank">freeCodeCamp — Linux for Beginners</a><div class="res-detail">Complete beginner Linux course on YouTube. Covers terminal and permissions.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://overthewire.org/wargames/bandit/" target="_blank">OverTheWire Bandit</a><div class="res-detail">Free gamified challenge that teaches Linux command line by solving puzzles.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-lab">Labs</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netacad.com/courses/os-it/ndg-linux-essentials" target="_blank">Cisco NetAcad — NDG Linux Essentials</a><div class="res-detail">Free Linux Essentials course from Cisco NetAcad. Earn a completion certificate.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="track-infra" class="track-panel">
+  <div class="intro-bar">
+    <div class="intro-title">Phase 2: IT Infrastructure Path</div>
+    <div class="intro-desc">You have moved past fixing end-user issues. Now you design and operate the servers, storage, virtualization, cloud platforms, and monitoring systems that run the entire business.</div>
+  </div>
+  <div class="path-box">
+    <div class="path-box-title">📍 MISSION DIRECTIVE: INFRASTRUCTURE</div>
+    <div class="path-box-text">Servers cannot connect without <strong>Networking (1)</strong>. Once connected, learn the OS environments: <strong>Windows Server (2)</strong> and <strong>Linux Server (3)</strong>. Master <strong>Virtualization (4)</strong> and <strong>Azure (5)</strong>. Protect systems with <strong>Storage (6)</strong>, <strong>Resilience (7)</strong>, and <strong>Security (8)</strong>. Set up <strong>Monitoring (9)</strong> and <strong>ITSM (10)</strong>. Advance to DevOps: <strong>Automation (11)</strong>, <strong>Containers (12)</strong>, and <strong>Documentation (13)</strong>.</div>
+  </div>
+  <div class="skill-tabs" id="infra-tabs">
+    <div class="stab active" onclick="switchSkill('infra','networking')">1. Net+</div>
+    <div class="stab" onclick="switchSkill('infra','windows')">2. WinServer</div>
+    <div class="stab" onclick="switchSkill('infra','linux')">3. Linux</div>
+    <div class="stab" onclick="switchSkill('infra','virt')">4. Virtualization</div>
+    <div class="stab" onclick="switchSkill('infra','cloud')">5. Azure/AWS</div>
+    <div class="stab" onclick="switchSkill('infra','storage')">6. Storage</div>
+    <div class="stab" onclick="switchSkill('infra','resilience')">7. Resilience</div>
+    <div class="stab" onclick="switchSkill('infra','security')">8. Security</div>
+    <div class="stab" onclick="switchSkill('infra','monitoring')">9. Monitoring</div>
+    <div class="stab" onclick="switchSkill('infra','itsm')">10. ITSM</div>
+    <div class="stab" onclick="switchSkill('infra','automation')">11. IaC</div>
+    <div class="stab" onclick="switchSkill('infra','containers')">12. Containers</div>
+    <div class="stab" onclick="switchSkill('infra','docs')">13. Docs</div>
+  </div>
+
+  <div id="infra-networking" class="spanel active">
+    <div class="skill-card">
+      <span class="prio p-basic">[LEVEL: GREENHORN]</span>
+      <div class="card-title">CompTIA Network+ (N10-009)</div>
+      <div class="why-box">The foundation of infrastructure. Every server, storage array, and cloud resource depends on networking (TCP/IP, VLANs, DNS) to function.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.professormesser.com/network-plus/n10-009/n10-009-video/n10-009-training-course/" target="_blank">Professor Messer — Network+ Course</a><div class="res-detail">Best free Network+ resource available.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=qiQR5rTSshw" target="_blank">freeCodeCamp — Full Networking Course</a><div class="res-detail">College-level networking from scratch.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netacad.com/courses/networking" target="_blank">Cisco NetAcad — Free Networking Fundamentals</a><div class="res-detail">Free Cisco courses with hands-on labs and badges.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netacad.com/cisco-packet-tracer" target="_blank">Cisco Packet Tracer</a><div class="res-detail">Simulate full enterprise networks with routers, switches, firewalls.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://uniontestprep.com/comptia-network/study-guide" target="_blank">Union Test Prep</a><div class="res-detail">Free practice exams and study guides.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="infra-windows" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-basic">[LEVEL: GREENHORN]</span>
+      <div class="card-title">Windows Server 2019 / 2022</div>
+      <div class="card-desc">Deploy, configure, and maintain domain controllers, manage DNS/DHCP servers, and configure failover clustering.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.microsoft.com/en-us/training/paths/windows-server-fundamentals/" target="_blank">Microsoft Learn — Windows Server Fundamentals</a><div class="res-detail">Official MS path for Server administration. Covers AD, DNS, DHCP.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-li">LinkedIn</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.microsoft.com/en-us/training/paths/administer-infrastructure-resources-in-windows-server/" target="_blank">Microsoft Learn — Administer Infrastructure</a><div class="res-detail">Advanced admin: Group Policy, Failover Clustering, Storage Spaces.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=85-bp7XxWDQ" target="_blank">freeCodeCamp — Active Directory Full Course</a><div class="res-detail">Complete AD, DNS, DHCP setup in a home lab environment.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022" target="_blank">Microsoft Eval Center — 180-Day Server Trial</a><div class="res-detail">Run Windows Server in VirtualBox for free to practice everything.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="infra-linux" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-inter">[LEVEL: RUNNER]</span>
+      <div class="card-title">Linux Server Administration (RHEL/Ubuntu)</div>
+      <div class="card-desc">Master package management, systemd, SSH keys, and file permissions. Red Hat RHCE is on the CUNY list.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://linuxjourney.com" target="_blank">Linux Journey</a><div class="res-detail">Best free Linux learning site. From first command to kernel internals.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=ROjZy1WbCIA" target="_blank">freeCodeCamp — Linux for Beginners</a><div class="res-detail">Complete Linux admin course from zero to managing services.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://developers.redhat.com/learn" target="_blank">Red Hat Developer</a><div class="res-detail">Free Red Hat training resources including prep for RHCSA exam.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netacad.com/courses/os-it/ndg-linux-unhatched" target="_blank">Cisco NetAcad — Linux Unhatched</a><div class="res-detail">Free beginner Linux courses from Cisco.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://overthewire.org/wargames/bandit/" target="_blank">OverTheWire Bandit</a><div class="res-detail">Solve puzzles using real commands to master the terminal.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-lab">Labs</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.cybrary.it/course/comptia-linux-plus" target="_blank">Cybrary — Linux+ Prep</a><div class="res-detail">Free Linux+ video content covering all exam domains.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="infra-virt" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-inter">[LEVEL: RUNNER]</span>
+      <div class="card-title">Virtualization — VMware vSphere</div>
+      <div class="why-box">Virtually every enterprise datacenter runs VMware. Deploy VMs, manage ESXi hosts, configure vSphere clusters, and manage datastores.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.vmware.com/education-services/learning-zone.html" target="_blank">VMware Learning Zone</a><div class="res-detail">Official VMware free learning. Start with "Getting Started with VMware."</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/results?search_query=VMware+vSphere+tutorial+beginners+2024" target="_blank">YouTube — VMware vSphere Tutorials</a><div class="res-detail">Multiple free VMware vSphere setup and administration tutorials.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://customerconnect.vmware.com/en/evalcenter?p=vmware-vsphere-eval" target="_blank">VMware vSphere Evaluation</a><div class="res-detail">Download and build a home lab cluster. Run on any PC with 16GB RAM.</div></div><div class="badges"><span class="badge b-lab">Free Trial</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.virtualbox.org/" target="_blank">VirtualBox</a><div class="res-detail">Run VMs on any PC for free to host Windows Server, Linux, and pfSense.</div></div><div class="badges"><span class="badge b-lab">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="infra-cloud" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-inter">[LEVEL: RUNNER]</span>
+      <div class="card-title">Cloud Infrastructure (Azure AZ-104 & AWS)</div>
+      <div class="card-desc">Azure Administrator covers Virtual Machines, Storage, VNets, and RBAC. AWS SysOps covers managing cloud infrastructure at scale.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.microsoft.com/en-us/training/paths/az-900-describe-cloud-concepts/" target="_blank">Microsoft Learn — AZ-900 Azure Fundamentals</a><div class="res-detail">Start here. Free official Microsoft learning path with free practice assessments.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-li">LinkedIn</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.microsoft.com/en-us/training/paths/az-104-administrator-prerequisites/" target="_blank">Microsoft Learn — AZ-104 Administrator Path</a><div class="res-detail">Full free official learning path with hands-on sandbox labs.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-lab">Labs</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=NKEFWyqJ5XA" target="_blank">freeCodeCamp — AZ-900 Course</a><div class="res-detail">Complete exam-ready AZ-900 course on YouTube.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://azure.microsoft.com/en-us/free/" target="_blank">Azure Free Account</a><div class="res-detail">Spin up real Azure VMs, virtual networks, and storage for free.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials" target="_blank">AWS Skill Builder — Cloud Practitioner Essentials</a><div class="res-detail">Official free AWS course for cloud fundamentals.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=NhDYbskXRgc" target="_blank">freeCodeCamp — AWS Cloud Practitioner</a><div class="res-detail">Complete exam-ready Cloud Practitioner course on YouTube.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://aws.amazon.com/free/" target="_blank">AWS Free Tier</a><div class="res-detail">Practice real AWS infrastructure with free EC2 instances and S3 buckets.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="infra-storage" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Storage Systems (SAN, NAS, NetApp)</div>
+      <div class="card-desc">Understand enterprise storage: SAN (Fibre Channel/iSCSI), NAS (NFS/CIFS), RAID levels, and LUN provisioning.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netapp.com/us/education/netapp-learning-center.aspx" target="_blank">NetApp Learning Center</a><div class="res-detail">Free ONTAP storage fundamentals. NetApp is highly respected in enterprise.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.truenas.com/download-truenas-core/" target="_blank">TrueNAS Core</a><div class="res-detail">Install TrueNAS in VirtualBox and practice NAS administration.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="infra-resilience" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Storage Resilience & Backups (Rubrik & Veeam)</div>
+      <div class="why-box">In the modern era, backup is a security duty. Learn immutable backups (data that cannot be deleted by hackers) and disaster recovery replication.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://training.rubrik.com/" target="_blank">Rubrik University — Zero Trust Data Security</a><div class="res-detail">Free training on modern ransomware-proof backup systems.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learning.dell.com/content/dell/en-us/home/training/storage.html" target="_blank">Dell Learning — Storage Concepts</a><div class="res-detail">Free foundational courses on PowerStore and Unity systems.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.veeam.com/free-courses.html" target="_blank">Veeam University</a><div class="res-detail">Complete free Veeam training. Covers backup jobs and restore testing.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.veeam.com/free-virtualization-software-vmware-hyper-v.html" target="_blank">Veeam Community Edition</a><div class="res-detail">Download free Veeam for your home lab to practice backup jobs.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="infra-security" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Infrastructure Security & Vulnerability Management</div>
+      <div class="card-desc">Implement security controls, vulnerability scanning, patch management, and security hardening (CIS Benchmarks).</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.professormesser.com/security-plus/sy0-701/sy0-701-video/sy0-701-training-course/" target="_blank">Professor Messer — Security+ SY0-701</a><div class="res-detail">The definitive free Security+ prep resource. Every exam objective covered.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.tenable.com/education/on-demand-courses" target="_blank">Tenable — Nessus Scanner Training</a><div class="res-detail">Free training on Nessus, the most widely used vulnerability scanner.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://tryhackme.com/path/outline/soclevel1" target="_blank">TryHackMe — SOC Level 1 Path</a><div class="res-detail">Hands-on security monitoring and log review from a defender perspective.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-lab">Labs</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="infra-monitoring" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Enterprise Monitoring (Splunk / Datadog / Nagios)</div>
+      <div class="card-desc">Set up dashboards, alerts, and log aggregation to detect metrics and outages before users notice them.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.datadoghq.com/" target="_blank">Datadog Learning Center</a><div class="res-detail">Free Datadog training with badges for observability and infrastructure monitoring.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span><span class="badge b-li">LinkedIn</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://education.splunk.com/catalog?category=getting-data-in&type=course" target="_blank">Splunk Education</a><div class="res-detail">Start with "Intro to Splunk" to learn log parsing. Highly demanded SIEM tool.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Cert</span><span class="badge b-li">LinkedIn</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.nagios.org/downloads/nagios-core/" target="_blank">Nagios Core</a><div class="res-detail">Download and install Nagios Core for free to monitor your lab servers.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/@TechWorldWithNana" target="_blank">TechWorld With Nana</a><div class="res-detail">Best free channel for modern monitoring concepts: Prometheus, Grafana, Datadog.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="infra-itsm" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">ITSM Processes (ITIL 4 & ServiceNow)</div>
+      <div class="card-desc">At the engineer level, you must understand Change Management. You cannot just reboot a server; you must file a change request.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=FLpXBQcSmXE" target="_blank">YouTube — ITIL 4 Foundation</a><div class="res-detail">Complete ITIL 4 Foundation exam prep.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://nowlearning.servicenow.com/lxp?id=overview" target="_blank">ServiceNow Now Learning</a><div class="res-detail">Free official ServiceNow training to understand Change Requests and CMDB.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Cert</span><span class="badge b-li">LinkedIn</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://developer.servicenow.com/dev.do" target="_blank">ServiceNow Developer Instance</a><div class="res-detail">Get a completely free full ServiceNow environment to practice workflows.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="infra-automation" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Automation & IaC (Ansible / Terraform / Python)</div>
+      <div class="why-box">Stop clicking buttons. Write code to deploy 100 servers at once. Terraform deploys cloud infrastructure as code. Ansible configures them.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.microsoft.com/en-us/training/modules/introduction-to-powershell/" target="_blank">Microsoft Learn — PowerShell for IT Pros</a><div class="res-detail">Full free PowerShell learning path from beginner to automation.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-li">LinkedIn</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://developer.hashicorp.com/terraform/tutorials" target="_blank">HashiCorp Terraform Tutorials</a><div class="res-detail">Learn Infrastructure as Code for Azure/AWS. Earn a free Terraform Associate cert badge.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Cert</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://developers.redhat.com/learn/ansible" target="_blank">Red Hat — Free Ansible Path</a><div class="res-detail">Official free Red Hat Ansible training for configuration management at scale.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/@TechWorldWithNana" target="_blank">TechWorld With Nana</a><div class="res-detail">Best free YouTube channel for Ansible and Terraform from beginner to advanced.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="infra-containers" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Docker, Kubernetes, and CI/CD Pipelines</div>
+      <div class="card-desc">Containers are rapidly replacing heavy VMs. Understanding Docker and Kubernetes orchestration is required for modern environments.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=fqMOX6JJhGo" target="_blank">freeCodeCamp — Docker for Beginners</a><div class="res-detail">Complete Docker course on YouTube. Covers containers, images, networking.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/@TechWorldWithNana" target="_blank">TechWorld With Nana — K8s</a><div class="res-detail">Best free Kubernetes beginner content on YouTube.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://labs.play-with-docker.com/" target="_blank">Play With Docker</a><div class="res-detail">Practice Docker in a real environment in your browser, no installation needed.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="infra-docs" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Technical Documentation & Network Diagrams</div>
+      <div class="card-desc">Infrastructure engineers who document well are invaluable. Start documenting your home lab now: draw network diagrams, write runbooks.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://app.diagrams.net/" target="_blank">draw.io</a><div class="res-detail">Free, no signup needed. Drag-and-drop network and architecture diagrams.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.notion.com" target="_blank">Notion</a><div class="res-detail">Document your home lab configs, write runbooks, create SOPs.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netboxlabs.com/oss/netbox/" target="_blank">NetBox</a><div class="res-detail">The open-source IPAM tool infrastructure teams actually use.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="track-network" class="track-panel">
+  <div class="intro-bar">
+    <div class="intro-title">Phase 3: Network Admin / Engineer</div>
+    <div class="intro-desc">You are now mastering the plumbing of the internet. From basic subnets to complex BGP routing, VPNs, and Palo Alto firewalls.</div>
+  </div>
+  <div class="path-box">
+    <div class="path-box-title">📍 MISSION DIRECTIVE: NETWORK ENGINEERING</div>
+    <div class="path-box-text">Ensure your subnetting is flawless via <strong>Fundamentals (1)</strong>. Then start the industry gold-standard: <strong>CCNA (2)</strong>. Focus heavily on <strong>VLANs (3)</strong>, <strong>Wireless (4)</strong>, and <strong>Routing (5)</strong>. Secure the perimeter with <strong>Firewalls (7)</strong> and <strong>VPNs (8)</strong>. Automate with <strong>Python (10)</strong> and broaden your value with <strong>Juniper/Fortinet (11)</strong>.</div>
+  </div>
+  <div class="skill-tabs" id="network-tabs">
+    <div class="stab active" onclick="switchSkill('network','fundamentals')">1. Fundamentals</div>
+    <div class="stab" onclick="switchSkill('network','ccna')">2. CCNA Prep</div>
+    <div class="stab" onclick="switchSkill('network','vlans')">3. VLANs/Switch</div>
+    <div class="stab" onclick="switchSkill('network','routing')">4. Routing</div>
+    <div class="stab" onclick="switchSkill('network','firewalls')">5. Firewalls</div>
+    <div class="stab" onclick="switchSkill('network','wireless')">6. Wireless</div>
+    <div class="stab" onclick="switchSkill('network','dns')">7. DNS/DHCP</div>
+    <div class="stab" onclick="switchSkill('network','monitoring')">8. Monitoring</div>
+    <div class="stab" onclick="switchSkill('network','vpn')">9. VPN Access</div>
+    <div class="stab" onclick="switchSkill('network','automation')">10. Automation</div>
+    <div class="stab" onclick="switchSkill('network','vendors')">11. Vendors</div>
+  </div>
+
+  <div id="network-fundamentals" class="spanel active">
+    <div class="skill-card">
+      <span class="prio p-basic">[LEVEL: GREENHORN]</span>
+      <div class="card-title">Networking Fundamentals — Subnetting & TCP/IP</div>
+      <div class="why-box">You cannot advance in networking without mastering subnet calculations. It is tested on every networking exam.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://subnetipv4.com/" target="_blank">SubnetIPv4.com</a><div class="res-detail">Practice subnetting calculations with instant feedback.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=qiQR5rTSshw" target="_blank">freeCodeCamp — Full Networking Course</a><div class="res-detail">College-level computer networking from scratch.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.professormesser.com/network-plus/n10-009/n10-009-video/n10-009-training-course/" target="_blank">Professor Messer — Network+ Course</a><div class="res-detail">The single best free networking resource.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netacad.com/courses/networking/networking-essentials" target="_blank">Cisco NetAcad — Networking Essentials</a><div class="res-detail">Covers all fundamentals with a Cisco completion badge.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://uniontestprep.com/comptia-network/study-guide" target="_blank">Union Test Prep</a><div class="res-detail">Free practice questions and study guides.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="network-ccna" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-inter">[LEVEL: RUNNER]</span>
+      <div class="card-title">Cisco CCNA 200-301 — Full Study Plan</div>
+      <div class="why-box">CCNA is the most recognized entry-level networking credential in the world. It proves you can configure and troubleshoot real Cisco equipment.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/@NetworkChuck/playlists" target="_blank">NetworkChuck — Free CCNA Course</a><div class="res-detail">The best free CCNA prep on YouTube. Explains every concept with real Packet Tracer labs.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=H8W9oMNSuwo" target="_blank">freeCodeCamp — Full CCNA Course (8+ hours)</a><div class="res-detail">Complete CCNA exam prep on YouTube. All topics from network fundamentals through automation.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netacad.com/cisco-packet-tracer" target="_blank">Cisco Packet Tracer</a><div class="res-detail">The only lab tool you need for CCNA prep. Build entire network topologies.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netacad.com/courses/networking/ccna-introduction-networks" target="_blank">NetAcad — CCNA 1: Intro</a><div class="res-detail">Official free Cisco course covering the first third of CCNA content.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netacad.com/courses/networking/ccna-switching-routing-wireless-essentials" target="_blank">NetAcad — CCNA 2: SRWE</a><div class="res-detail">VLANs, STP, inter-VLAN routing, OSPF, and WLAN.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netacad.com/courses/networking/ccna-enterprise-networking-security-automation" target="_blank">NetAcad — CCNA 3: ENSA</a><div class="res-detail">OSPF, ACLs, NAT, VPN, and automation fundamentals.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="network-vlans" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-inter">[LEVEL: RUNNER]</span>
+      <div class="card-title">VLANs, Trunking, STP, and Switching</div>
+      <div class="card-desc">VLANs are how enterprise networks segment HR, guest Wi-Fi, and servers into isolated logical networks on the same physical switch.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/@NetworkChuck" target="_blank">NetworkChuck — VLANs Made Easy</a><div class="res-detail">The best free explanation of VLANs available.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netacad.com/cisco-packet-tracer" target="_blank">Cisco Packet Tracer</a><div class="res-detail">Build full VLAN topologies in Packet Tracer for free.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=Abe11ETjN3o" target="_blank">YouTube — Spanning Tree Protocol (STP)</a><div class="res-detail">Explains the election process and port roles clearly.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="network-routing" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Routing Protocols — OSPF, BGP, Static Routes</div>
+      <div class="why-box">Dynamic routing protocols (OSPF, BGP) automatically adapt to network changes in large enterprises and on the internet. BGP runs the internet.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=kfvJ8QVJscc" target="_blank">freeCodeCamp — OSPF Routing Protocol Full Course</a><div class="res-detail">Complete OSPF deep dive. Covers single-area, multi-area, and troubleshooting.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/@NetworkChuck" target="_blank">NetworkChuck — Routing Explained</a><div class="res-detail">Covers static routes, OSPF, and BGP from beginner perspective.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netacad.com/cisco-packet-tracer" target="_blank">Cisco Packet Tracer</a><div class="res-detail">Configure OSPF, static routes, and routing tables in simulation.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.cbtnuggets.com/it-training/cisco/ccnp-enterprise" target="_blank">CBT Nuggets — CCNP Preview</a><div class="res-detail">Advanced OSPF and BGP concepts.</div></div><div class="badges"><span class="badge b-free">Partial Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="network-firewalls" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Firewalls, ACLs, and Network Security</div>
+      <div class="card-desc">Understanding Access Control Lists (ACLs), NAT, and stateful packet inspection is essential. Firewalls control the perimeter.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.pfsense.org/download/" target="_blank">pfSense — Free enterprise firewall OS</a><div class="res-detail">Install pfSense in VirtualBox. Configure firewall rules, NAT, and VLANs.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/results?search_query=pfSense+tutorial+beginners" target="_blank">YouTube — pfSense Tutorials</a><div class="res-detail">Covering initial setup, firewall rules, VLANs.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.paloaltonetworks.com/services/education/digital-learning" target="_blank">Palo Alto Networks — Cybersecurity Foundation</a><div class="res-detail">Next-Gen Firewall (NGFW) concepts. Earn a digital badge for LinkedIn.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.cisco.com/c/en/us/training-events/training-certifications/training/learning-matrix.html" target="_blank">Cisco Learning</a><div class="res-detail">Free documentation and learning resources for ACL configuration and NAT.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="network-wireless" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-inter">[LEVEL: RUNNER]</span>
+      <div class="card-title">Enterprise Wireless (WLCs & Authentication)</div>
+      <div class="card-desc">Enterprise Wi-Fi is not home Wi-Fi. Understand WPA3 enterprise authentication with RADIUS, wireless LAN controllers (WLC), and AP roaming.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.netacad.com/courses/networking/ccna-enterprise-networking-security-automation" target="_blank">Cisco NetAcad — CCNA Wireless Module</a><div class="res-detail">The CCNA enterprise networking course includes a complete wireless module.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/results?search_query=enterprise+wireless+networking+tutorial+CCNA" target="_blank">YouTube — Enterprise Wireless</a><div class="res-detail">Tutorials on enterprise WLAN: controllers, APs, authentication.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.ui.com/training/" target="_blank">Ubiquiti UniFi Training</a><div class="res-detail">Free training on the UniFi platform covering AP management.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="network-dns" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-inter">[LEVEL: RUNNER]</span>
+      <div class="card-title">DNS, DHCP, NTP Deep Dive</div>
+      <div class="card-desc">DNS resolves names to IPs. DHCP assigns IPs. NTP synchronizes clocks. You must be able to configure and troubleshoot these core services.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=27r4Bzuj5NQ" target="_blank">YouTube — DNS Explained In Depth</a><div class="res-detail">Deep dive into record types, recursive queries, and caching.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.microsoft.com/en-us/training/modules/implement-dns/" target="_blank">Microsoft Learn — Implement DNS</a><div class="res-detail">Free official course on deploying and configuring Windows DNS Server.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.isc.org/bind/" target="_blank">ISC BIND — Free DNS Server</a><div class="res-detail">Deploy BIND on a Linux VM in your home lab. Practice zone files.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://dnschecker.org/" target="_blank">DNSChecker.org</a><div class="res-detail">Test DNS propagation, query records, and verify DNS configurations for free.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="network-monitoring" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Network Monitoring (PRTG, SNMP, NetFlow)</div>
+      <div class="card-desc">Track bandwidth utilization, identify congested links, and detect device failures using SNMP.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.paessler.com/prtg" target="_blank">PRTG</a><div class="res-detail">Download PRTG to monitor your home lab network with real enterprise software.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.nagios.org/downloads/nagios-core/" target="_blank">Nagios Core</a><div class="res-detail">The original open-source network monitoring tool. Download free, install on Linux.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.wireshark.org/docs/" target="_blank">Wireshark</a><div class="res-detail">Capture and analyze actual network packets for deep troubleshooting.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-lab">Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.datadoghq.com/" target="_blank">Datadog Learning Center</a><div class="res-detail">Free Datadog training including network monitoring, NPM, and dashboards.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="network-vpn" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">VPN Access (IPSec & OpenVPN)</div>
+      <div class="card-desc">Encrypt traffic between physical office locations (Site-to-Site VPNs) and remote workers securely connecting to resources.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/results?search_query=IPSec+VPN+site+to+site+tutorial+Cisco" target="_blank">YouTube — IPSec VPN</a><div class="res-detail">Free tutorials on configuring IPSec VPNs on Cisco routers.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.pfsense.org/download/" target="_blank">pfSense — Configure OpenVPN/IPSec</a><div class="res-detail">pfSense supports full OpenVPN server, IPSec site-to-site. Practice complete VPNs.</div></div><div class="badges"><span class="badge b-lab">Free Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://openvpn.net/community-resources/how-to/" target="_blank">OpenVPN — Config Guide</a><div class="res-detail">Documentation for setting up free VPN servers and clients.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="network-automation" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Network Programmability (Python & REST APIs)</div>
+      <div class="why-box">Instead of manually SSHing into 200 switches, use Python (Netmiko) to script the changes in seconds. A background in Python is a huge advantage here.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=TV9u39-s7cs" target="_blank">freeCodeCamp — Python for Network Engineers</a><div class="res-detail">Use Python to automate network tasks, SSH connections, and config changes.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://developer.cisco.com/learning/tracks/netprog-eng/" target="_blank">Cisco DevNet — Programmability</a><div class="res-detail">Official free Cisco training on network APIs, Python, and Ansible.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://developers.redhat.com/learn/ansible" target="_blank">Red Hat — Ansible for Network</a><div class="res-detail">Free Red Hat Ansible training including network automation modules.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="network-vendors" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Vendor Specializations (Juniper / Fortinet)</div>
+      <div class="card-desc">Broaden your market value. Fortinet is popular for SD-WAN, and Juniper is heavily used in Data Centers.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.juniper.net/us/en/training.html" target="_blank">Juniper Education — Free JNCIA</a><div class="res-detail">Free training to master Junos OS. Complete test for a 75% discount voucher.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Voucher</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://training.fortinet.com/" target="_blank">Fortinet NSE 1-3</a><div class="res-detail">Foundational cybersecurity badges recognized by the industry.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.paloaltonetworks.com/cyberpedia/free-cybersecurity-education-courses" target="_blank">Palo Alto Beacon</a><div class="res-detail">The "Fundamentals of Network Security" covers the architecture of powerful firewalls.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="track-modern" class="track-panel">
+  <div class="intro-bar">
+    <div class="intro-title">Phase 4: Modern IT Skill Set & Automation</div>
+    <div class="intro-desc">The industry has shifted to intelligent orchestration. This phase bridges technical execution with business strategy, emphasizing AI-driven operations and high-spike human skills.</div>
+  </div>
+  <div class="path-box">
+    <div class="path-box-title">📍 MISSION DIRECTIVE: MODERN IT</div>
+    <div class="path-box-text">A background in Python, data science, and scripting gives you a massive advantage in this phase. Treat the previous Support and Networking steps as the necessary groundwork. Now, start with <strong>AI Literacy (1)</strong> to automate your documentation. Develop <strong>Emotional Intelligence (2)</strong> for high-level management roles. Then, dive deep into <strong>AIOps (3)</strong> to monitor infrastructure predictively, use <strong>Kubernetes (4)</strong> for modern orchestration, and finalize your job hunt by building an <strong>Evidence-Based Portfolio (5)</strong> to prove your skills.</div>
+  </div>
+  <div class="skill-tabs" id="modern-tabs">
+    <div class="stab active" onclick="switchSkill('modern','prompting')">1. AI Literacy</div>
+    <div class="stab" onclick="switchSkill('modern','eq')">2. Soft Skills</div>
+    <div class="stab" onclick="switchSkill('modern','aiops')">3. AIOps</div>
+    <div class="stab" onclick="switchSkill('modern','k8s')">4. K8s Networking</div>
+    <div class="stab" onclick="switchSkill('modern','portfolio')">5. Evidence Portfolio</div>
+  </div>
+
+  <div id="modern-prompting" class="spanel active">
+    <div class="skill-card">
+      <span class="prio p-inter">[LEVEL: RUNNER]</span>
+      <div class="card-title">AI Literacy & Documentation Automation</div>
+      <div class="why-box">IT professionals in 2026 must move beyond manual data entry. Prompt engineering is a core skill used to automate technical "Runbooks" and assist with complex scripts.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.microsoft.com/en-us/training/modules/fundamentals-generative-ai/" target="_blank">Microsoft Learn — Intro to generative AI and agents</a><div class="res-detail">Explore the fundamentals of LLMs and core concepts of agentic AI solutions.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.skills.google/paths/118" target="_blank">Google Skills Boost — Beginner: Generative AI</a><div class="res-detail">Earn an official Google GenAI badge. Covers prompt design in Vertex AI.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modern-eq" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Emotional Intelligence (EQ) & Soft Skills</div>
+      <div class="card-desc">As routine tasks are automated via Python or AI, the value of IT shifts to strategic problem-solving. Master the skills machines cannot replicate: conflict resolution and adaptability.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.classcentral.com/course/udemy-15-powerful-soft-skills-for-a-successful-lifestyle-42085" target="_blank">Udemy — 15 Powerful Soft Skills</a><div class="res-detail">Free tier course targeting empathy, clear communication, and professional mindset.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://formacionpoliticaisc.buenosaires.gob.ar/breaking-review/top-it-skills-your-path-to-a-tech-career-1767648693" target="_blank">Coursera / edX — Communication in IT</a><div class="res-detail">Search Coursera for free audit courses. Being able to clearly convey technical issues is critical.</div></div><div class="badges"><span class="badge b-free">Free Audit</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modern-aiops" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">AIOps & Predictive Observability</div>
+      <div class="why-box">Move from reactive monitoring (checking logs after an outage) to predictive observability. A background in Data Modeling makes setting up Datadog dashboards much more intuitive.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://learn.datadoghq.com/" target="_blank">Datadog Learning Center — Full free training</a><div class="res-detail">Learn to create dashboards that track infrastructure health and deploy intelligent monitors.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span><span class="badge b-li">LinkedIn</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://education.splunk.com/catalog?category=getting-data-in&type=course" target="_blank">Splunk Education — Free Splunk Fundamentals</a><div class="res-detail">Splunk leverages AI and advanced search to parse logs at scale.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modern-k8s" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Network Automation & Kubernetes (K8s)</div>
+      <div class="card-desc">The explosive growth of cloud-native projects makes Kubernetes the de facto platform. Master Kubernetes networking (ingress, services) as the bridge to modern software deployment.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://techbeatly.com/kubernetes-free-courses/" target="_blank">Linux Foundation — Introduction to Kubernetes</a><div class="res-detail">In-depth foundational course by The Linux Foundation. Prepares you for CKA concepts.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://www.youtube.com/watch?v=d6WC5n9G_sM" target="_blank">freeCodeCamp — Kubernetes Beginners Tutorial</a><div class="res-detail">Video course covering Pods, Services, and Ingress.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://developer.cisco.com/learning/tracks/netprog-eng/" target="_blank">Cisco DevNet — Free Network Programmability Training</a><div class="res-detail">Official free Cisco training on REST APIs, Python, and JSON data formats specifically designed for automating network configuration tasks without the CLI.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-cert">Badge</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modern-portfolio" class="spanel">
+    <div class="skill-card">
+      <span class="prio p-adv">[LEVEL: ELITE]</span>
+      <div class="card-title">Evidence-Based Portfolio (IaC & GitHub)</div>
+      <div class="why-box">Certifications get you past HR filters; a documented portfolio gets you the actual engineering job. Instead of just listing skills, show your code.</div>
+      <div class="resources">
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://developer.hashicorp.com/terraform/tutorials" target="_blank">HashiCorp Terraform Tutorials</a><div class="res-detail">Learn to deploy AWS or Azure resources via code. Keep these files in a public GitHub.</div></div><div class="badges"><span class="badge b-free">Free</span><span class="badge b-lab">Lab</span></div></div>
+        <div class="res"><div class="res-meta"><a class="res-name" href="https://pages.github.com/" target="_blank">GitHub Pages — Host your IT Portfolio for Free</a><div class="res-detail">Create a free website to post your 3-5 high-quality infrastructure case studies and network diagrams.</div></div><div class="badges"><span class="badge b-free">Free</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="track-certs" class="track-panel">
+  <div class="intro-bar">
+    <div class="intro-title">Cert Deep Dives — Full Breakdown of Every Key Certification</div>
+    <div class="intro-desc">Each cert listed here can substitute for 1 year of experience on the CUNY application, or is a recognized industry standard for your resume and LinkedIn.</div>
+  </div>
+  <div class="path-box">
+    <div class="path-box-title">📍 Recommended Cert Order:</div>
+    <div class="path-box-text"><strong>Network+ (1)</strong> → <strong>Security+ (2)</strong> → <strong>A+ (parallel with Network+)</strong> → <strong>Linux+ (3)</strong> → <strong>Cloud+ or Azure AZ-104 (4)</strong> → <strong>CCNA (5)</strong>. Stack 4–5 of these alongside infrastructure experience and you become highly competitive.</div>
+  </div>
+  <div class="skill-tabs" id="certs-tabs">
+    <div class="stab active" onclick="switchSkill('certs','aplus')">CompTIA A+</div>
+    <div class="stab" onclick="switchSkill('certs','netplus')">CompTIA Network+</div>
+    <div class="stab" onclick="switchSkill('certs','secplus')">CompTIA Security+</div>
+    <div class="stab" onclick="switchSkill('certs','linuxplus')">CompTIA Linux+</div>
+    <div class="stab" onclick="switchSkill('certs','cloudplus')">CompTIA Cloud+</div>
+    <div class="stab" onclick="switchSkill('certs','ccna')">Cisco CCNA</div>
+  </div>
+
+  <div id="certs-aplus" class="spanel active">
+    <div class="cert-card">
+      <div class="cert-card-header">
+        <div class="cert-card-left">
+          <div class="cert-card-name">CompTIA A+ (220-1101 & 220-1102)</div>
+          <div class="cert-card-sub">The universal entry-level IT credential — recognized by Google, IBM, Intel, Microsoft, and the US DoD.</div>
+        </div>
+        <div class="cert-card-right">
+          <div class="cert-exam-cost">~$246/exam</div>
+          <div class="cert-exam-label">2 exams required</div>
+        </div>
+      </div>
+      <div class="cert-meta-grid">
+        <div class="cert-meta-box"><div class="cert-meta-label">Difficulty</div><div class="cert-meta-val">Beginner</div></div>
+        <div class="cert-meta-box"><div class="cert-meta-label">Exam Format</div><div class="cert-meta-val">90 questions, 90 min each</div></div>
+        <div class="cert-meta-box"><div class="cert-meta-label">Passing Score</div><div class="cert-meta-val">675 / 700 out of 900</div></div>
+      </div>
+      <div class="cert-section-title">Core 1 (220-1101) — Domain Weights</div>
+      <div class="domain-list">
+        <div class="domain-row"><span class="domain-label">Mobile Devices</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:15%"></div></div><span class="domain-pct">15%</span></div>
+        <div class="domain-row"><span class="domain-label">Networking</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:20%"></div></div><span class="domain-pct">20%</span></div>
+        <div class="domain-row"><span class="domain-label">Hardware</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:25%"></div></div><span class="domain-pct">25%</span></div>
+        <div class="domain-row"><span class="domain-label">Virtualization & Cloud</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:11%"></div></div><span class="domain-pct">11%</span></div>
+        <div class="domain-row"><span class="domain-label">Hardware & Network Troubleshooting</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:29%"></div></div><span class="domain-pct">29%</span></div>
+      </div>
+      <div class="cert-section-title">Core 2 (220-1102) — Domain Weights</div>
+      <div class="domain-list">
+        <div class="domain-row"><span class="domain-label">Operating Systems</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:31%"></div></div><span class="domain-pct">31%</span></div>
+        <div class="domain-row"><span class="domain-label">Security</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:25%"></div></div><span class="domain-pct">25%</span></div>
+        <div class="domain-row"><span class="domain-label">Software Troubleshooting</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:22%"></div></div><span class="domain-pct">22%</span></div>
+        <div class="domain-row"><span class="domain-label">Operational Procedures</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:22%"></div></div><span class="domain-pct">22%</span></div>
+      </div>
+      <div class="cert-section-title">Exam Tips</div>
+      <div class="tips-grid">
+        <div class="tip-box"><div class="tip-label">Performance-Based Qs</div><div class="tip-text">The exam opens with PBQs (drag-and-drop and simulation). Flag them and skip — come back after answering the multiple choice questions first.</div></div>
+        <div class="tip-box"><div class="tip-label">Study Both Cores Together</div><div class="tip-text">Core 2 references topics from Core 1 frequently. Study them in parallel rather than finishing Core 1 then starting Core 2 cold.</div></div>
+        <div class="tip-box"><div class="tip-label">Acronyms Are Everything</div><div class="tip-text">Know your acronyms cold: POST, BIOS/UEFI, RAID, ESD, PCI, PCIe, DIMM, SODIMM, MBR, GPT.</div></div>
+        <div class="tip-box"><div class="tip-label">Troubleshooting Methodology</div><div class="tip-text">CompTIA has a specific 6-step troubleshooting methodology. Memorize it exactly — it appears on Core 2 and is referenced in answer choices.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="certs-netplus" class="spanel">
+    <div class="cert-card">
+      <div class="cert-card-header">
+        <div class="cert-card-left">
+          <div class="cert-card-name">CompTIA Network+ (N10-009)</div>
+          <div class="cert-card-sub">Vendor-neutral networking cert. Substitutes 1 year experience on CUNY application.</div>
+        </div>
+        <div class="cert-card-right">
+          <div class="cert-exam-cost">~$370</div>
+          <div class="cert-exam-label">1 exam required</div>
+        </div>
+      </div>
+      <div class="cert-meta-grid">
+        <div class="cert-meta-box"><div class="cert-meta-label">Difficulty</div><div class="cert-meta-val">Beginner–Intermediate</div></div>
+        <div class="cert-meta-box"><div class="cert-meta-label">Exam Format</div><div class="cert-meta-val">90 questions, 90 min</div></div>
+        <div class="cert-meta-box"><div class="cert-meta-label">Passing Score</div><div class="cert-meta-val">720 out of 900</div></div>
+      </div>
+      <div class="cert-section-title">Domain Weights (N10-009)</div>
+      <div class="domain-list">
+        <div class="domain-row"><span class="domain-label">Networking Fundamentals</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:24%"></div></div><span class="domain-pct">24%</span></div>
+        <div class="domain-row"><span class="domain-label">Network Implementations</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:19%"></div></div><span class="domain-pct">19%</span></div>
+        <div class="domain-row"><span class="domain-label">Network Operations</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:16%"></div></div><span class="domain-pct">16%</span></div>
+        <div class="domain-row"><span class="domain-label">Network Security</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:19%"></div></div><span class="domain-pct">19%</span></div>
+        <div class="domain-row"><span class="domain-label">Network Troubleshooting</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:22%"></div></div><span class="domain-pct">22%</span></div>
+      </div>
+      <div class="cert-section-title">Exam Tips</div>
+      <div class="tips-grid">
+        <div class="tip-box"><div class="tip-label">Master Subnetting Cold</div><div class="tip-text">You will get subnetting questions on every exam attempt. Practice until you can calculate subnet masks, host ranges, and CIDR notation in under 30 seconds per question.</div></div>
+        <div class="tip-box"><div class="tip-label">Know Your Port Numbers</div><div class="tip-text">FTP 20/21, SSH 22, Telnet 23, SMTP 25, DNS 53, HTTP 80, HTTPS 443, RDP 3389, SNMP 161. These appear as answer choices constantly.</div></div>
+        <div class="tip-box"><div class="tip-label">OSI Model in Order</div><div class="tip-text">Know which protocols and devices operate at which OSI layer. Physical, Data Link, Network, Transport, Session, Presentation, Application.</div></div>
+        <div class="tip-box"><div class="tip-label">Packet Tracer Before Exam</div><div class="tip-text">Build at least one full network topology in Packet Tracer — router, switch, VLANs, OSPF. Hands-on practice makes the PBQ simulations feel familiar.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="certs-secplus" class="spanel">
+    <div class="cert-card">
+      <div class="cert-card-header">
+        <div class="cert-card-left">
+          <div class="cert-card-name">CompTIA Security+ (SY0-701)</div>
+          <div class="cert-card-sub">DoD 8570 compliant — required for US government and government-adjacent IT roles. Substitutes 1 year experience on CUNY application.</div>
+        </div>
+        <div class="cert-card-right">
+          <div class="cert-exam-cost">~$370</div>
+          <div class="cert-exam-label">1 exam required</div>
+        </div>
+      </div>
+      <div class="cert-meta-grid">
+        <div class="cert-meta-box"><div class="cert-meta-label">Difficulty</div><div class="cert-meta-val">Intermediate</div></div>
+        <div class="cert-meta-box"><div class="cert-meta-label">Exam Format</div><div class="cert-meta-val">90 questions, 90 min</div></div>
+        <div class="cert-meta-box"><div class="cert-meta-label">Passing Score</div><div class="cert-meta-val">750 out of 900</div></div>
+      </div>
+      <div class="cert-section-title">Domain Weights (SY0-701)</div>
+      <div class="domain-list">
+        <div class="domain-row"><span class="domain-label">General Security Concepts</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:12%"></div></div><span class="domain-pct">12%</span></div>
+        <div class="domain-row"><span class="domain-label">Threats, Vulnerabilities & Mitigations</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:22%"></div></div><span class="domain-pct">22%</span></div>
+        <div class="domain-row"><span class="domain-label">Security Architecture</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:18%"></div></div><span class="domain-pct">18%</span></div>
+        <div class="domain-row"><span class="domain-label">Security Operations</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:28%"></div></div><span class="domain-pct">28%</span></div>
+        <div class="domain-row"><span class="domain-label">Security Program Management</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:20%"></div></div><span class="domain-pct">20%</span></div>
+      </div>
+      <div class="cert-section-title">Exam Tips</div>
+      <div class="tips-grid">
+        <div class="tip-box"><div class="tip-label">Security Operations is 28%</div><div class="tip-text">The largest domain. Focus heavily on incident response procedures, log analysis, SIEM tools, and endpoint protection. TryHackMe SOC labs are perfect prep for this domain.</div></div>
+        <div class="tip-box"><div class="tip-label">Know Your Attack Types</div><div class="tip-text">Phishing vs spear phishing vs whaling vs vishing vs smishing. SQL injection, XSS, CSRF, buffer overflow, DDoS. These appear on almost every question set.</div></div>
+        <div class="tip-box"><div class="tip-label">Cryptography Matters</div><div class="tip-text">Understand symmetric vs asymmetric encryption, TLS, PKI, digital certificates, hashing (MD5, SHA-256), and key exchange. Know which algorithms are deprecated.</div></div>
+        <div class="tip-box"><div class="tip-label">Application of Concepts</div><div class="tip-text">The SY0-701 exam heavily tests application of concepts, not just memorization.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="certs-linuxplus" class="spanel">
+    <div class="cert-card">
+      <div class="cert-card-header">
+        <div class="cert-card-left">
+          <div class="cert-card-name">CompTIA Linux+ (XK0-005)</div>
+          <div class="cert-card-sub">The only vendor-neutral Linux certification recognized by CompTIA. Substitutes 1 year of experience.</div>
+        </div>
+        <div class="cert-card-right">
+          <div class="cert-exam-cost">~$370</div>
+          <div class="cert-exam-label">1 exam required</div>
+        </div>
+      </div>
+      <div class="cert-meta-grid">
+        <div class="cert-meta-box"><div class="cert-meta-label">Difficulty</div><div class="cert-meta-val">Intermediate</div></div>
+        <div class="cert-meta-box"><div class="cert-meta-label">Exam Format</div><div class="cert-meta-val">90 questions, 90 min</div></div>
+        <div class="cert-meta-box"><div class="cert-meta-label">Passing Score</div><div class="cert-meta-val">720 out of 900</div></div>
+      </div>
+      <div class="cert-section-title">Domain Weights (XK0-005)</div>
+      <div class="domain-list">
+        <div class="domain-row"><span class="domain-label">System Management</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:32%"></div></div><span class="domain-pct">32%</span></div>
+        <div class="domain-row"><span class="domain-label">Security</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:21%"></div></div><span class="domain-pct">21%</span></div>
+        <div class="domain-row"><span class="domain-label">Scripting, Containers & Auto</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:19%"></div></div><span class="domain-pct">19%</span></div>
+        <div class="domain-row"><span class="domain-label">Troubleshooting</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:28%"></div></div><span class="domain-pct">28%</span></div>
+      </div>
+      <div class="cert-section-title">Exam Tips</div>
+      <div class="tips-grid">
+        <div class="tip-box"><div class="tip-label">Build a Linux Home Lab</div><div class="tip-text">Download Ubuntu Server or CentOS Stream free and spin it up in VirtualBox. Type every command you study. Linux+ has PBQ simulations — only hands-on practice prepares you.</div></div>
+        <div class="tip-box"><div class="tip-label">Scripting Domain Is Growing</div><div class="tip-text">The XK0-005 version added more scripting and automation content. Write at least 10 real bash scripts before exam day — loops, conditionals, cron jobs, and log parsing.</div></div>
+        <div class="tip-box"><div class="tip-label">Know Both Distro Families</div><div class="tip-text">The exam tests both Debian (apt) and RHEL (dnf/yum) package managers. Practice on both.</div></div>
+        <div class="tip-box"><div class="tip-label">Containers Are on the Exam</div><div class="tip-text">Know docker run, docker ps, docker images, docker stop, and docker-compose fundamentals.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="certs-cloudplus" class="spanel">
+    <div class="cert-card">
+      <div class="cert-card-header">
+        <div class="cert-card-left">
+          <div class="cert-card-name">CompTIA Cloud+ (CV0-004)</div>
+          <div class="cert-card-sub">Vendor-neutral cloud operations cert — validates skills across AWS, Azure, and GCP.</div>
+        </div>
+        <div class="cert-card-right">
+          <div class="cert-exam-cost">~$370</div>
+          <div class="cert-exam-label">1 exam required</div>
+        </div>
+      </div>
+      <div class="cert-meta-grid">
+        <div class="cert-meta-box"><div class="cert-meta-label">Difficulty</div><div class="cert-meta-val">Intermediate</div></div>
+        <div class="cert-meta-box"><div class="cert-meta-label">Exam Format</div><div class="cert-meta-val">90 questions, 90 min</div></div>
+        <div class="cert-meta-box"><div class="cert-meta-label">Passing Score</div><div class="cert-meta-val">750 out of 900</div></div>
+      </div>
+      <div class="cert-section-title">Domain Weights (CV0-004)</div>
+      <div class="domain-list">
+        <div class="domain-row"><span class="domain-label">Cloud Architecture & Design</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:13%"></div></div><span class="domain-pct">13%</span></div>
+        <div class="domain-row"><span class="domain-label">Cloud Security</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:20%"></div></div><span class="domain-pct">20%</span></div>
+        <div class="domain-row"><span class="domain-label">Cloud Deployment</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:23%"></div></div><span class="domain-pct">23%</span></div>
+        <div class="domain-row"><span class="domain-label">Cloud Operations</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:22%"></div></div><span class="domain-pct">22%</span></div>
+        <div class="domain-row"><span class="domain-label">Troubleshooting</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:22%"></div></div><span class="domain-pct">22%</span></div>
+      </div>
+      <div class="cert-section-title">Exam Tips</div>
+      <div class="tips-grid">
+        <div class="tip-box"><div class="tip-label">Cloud+ vs AZ-104</div><div class="tip-text">Cloud+ is vendor-neutral and broader. AZ-104 is deeper on Azure specifically and is on the CUNY substitution list. Do AZ-104 if you want Azure depth and a CUNY substitution.</div></div>
+        <div class="tip-box"><div class="tip-label">Security Domain is 20%</div><div class="tip-text">Know IAM, shared responsibility model, encryption at rest vs in transit, security groups vs NACLs, and cloud compliance frameworks.</div></div>
+        <div class="tip-box"><div class="tip-label">Troubleshooting is 22%</div><div class="tip-text">You will get scenario-based questions about diagnosing connectivity issues, storage problems, and cost overruns.</div></div>
+        <div class="tip-box"><div class="tip-label">Know Service Models</div><div class="tip-text">Identify IaaS vs PaaS vs SaaS from scenarios. Also know public, private, hybrid, and community cloud deployment models cold.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="certs-ccna" class="spanel">
+    <div class="cert-card">
+      <div class="cert-card-header">
+        <div class="cert-card-left">
+          <div class="cert-card-name">Cisco CCNA (200-301)</div>
+          <div class="cert-card-sub">The most recognized entry-level networking cert in the world. Directly on the CUNY cert substitution list.</div>
+        </div>
+        <div class="cert-card-right">
+          <div class="cert-exam-cost">~$330</div>
+          <div class="cert-exam-label">1 exam required</div>
+        </div>
+      </div>
+      <div class="cert-meta-grid">
+        <div class="cert-meta-box"><div class="cert-meta-label">Difficulty</div><div class="cert-meta-val">Intermediate</div></div>
+        <div class="cert-meta-box"><div class="cert-meta-label">Exam Format</div><div class="cert-meta-val">120 questions, 120 min</div></div>
+        <div class="cert-meta-box"><div class="cert-meta-label">Passing Score</div><div class="cert-meta-val">~825 out of 1000</div></div>
+      </div>
+      <div class="cert-section-title">Domain Weights (200-301)</div>
+      <div class="domain-list">
+        <div class="domain-row"><span class="domain-label">Network Fundamentals</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:20%"></div></div><span class="domain-pct">20%</span></div>
+        <div class="domain-row"><span class="domain-label">Network Access</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:20%"></div></div><span class="domain-pct">20%</span></div>
+        <div class="domain-row"><span class="domain-label">IP Connectivity</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:25%"></div></div><span class="domain-pct">25%</span></div>
+        <div class="domain-row"><span class="domain-label">IP Services</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:10%"></div></div><span class="domain-pct">10%</span></div>
+        <div class="domain-row"><span class="domain-label">Security Fundamentals</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:15%"></div></div><span class="domain-pct">15%</span></div>
+        <div class="domain-row"><span class="domain-label">Automation & Programmability</span><div class="domain-bar-wrap"><div class="domain-bar" style="width:10%"></div></div><span class="domain-pct">10%</span></div>
+      </div>
+      <div class="cert-section-title">Exam Tips</div>
+      <div class="tips-grid">
+        <div class="tip-box"><div class="tip-label">IP Connectivity = 25% of Exam</div><div class="tip-text">The biggest domain. Master OSPF configuration, the show ip route output, and how routing decisions are made. Configure OSPF from scratch in Packet Tracer at least 20 times.</div></div>
+        <div class="tip-box"><div class="tip-label">Simulation Questions (Sims)</div><div class="tip-text">CCNA includes interactive Cisco IOS simulations. You type real commands and the simulator evaluates your config. Practice in Packet Tracer — there is no substitute for this.</div></div>
+        <div class="tip-box"><div class="tip-label">Automation Is Now 10%</div><div class="tip-text">The 200-301 version includes network automation basics: REST APIs, JSON, YANG/NETCONF, DNA Center, and Ansible. Know the difference between traditional and controller-based networking.</div></div>
+        <div class="tip-box"><div class="tip-label">Earn Cisco Badges First</div><div class="tip-text">Complete all 3 free Cisco NetAcad CCNA courses before booking the exam. Each earns a LinkedIn badge. Do this before spending money on the exam voucher.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><script>
+function switchTrack(t){
+  document.querySelectorAll('.track-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.track-panel').forEach(p=>p.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('track-'+t).classList.add('active');
+}
+function switchSkill(track,skill){
+  var tabs=document.querySelectorAll('#'+track+'-tabs .stab');
+  var panels=document.querySelectorAll('#track-'+track+' .spanel');
+  tabs.forEach(t=>t.classList.remove('active'));
+  panels.forEach(p=>p.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  var tgt = document.getElementById(track+'-'+skill);
+  if(tgt) tgt.classList.add('active');
+}
+</script>
+</body>
+</html>
